@@ -18,9 +18,9 @@ Page text lives in `src/data/`. Documentation pages live in `content/docs/`.
 
 ## Deployment
 
-The site is hosted on Cloudflare Pages, which builds and publishes it on every push to the default branch.
+The site is hosted on Cloudflare, which builds and publishes it on every push to the default branch.
 
-Build settings: command `npm run build`, output directory `build`, Node.js 20 (set in `.node-version`).
+Build command `npm run build`, deploy command `npx wrangler deploy` (configured in `wrangler.jsonc`), Node.js 20 (set in `.node-version`).
 
 ## License
 
