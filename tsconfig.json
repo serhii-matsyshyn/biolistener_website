@@ -1,0 +1,10 @@
+{
+  "extends": "@docusaurus/tsconfig",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "strict": true,
+    "noEmit": true
+  },
+  "include": ["src", "docusaurus.config.ts", "sidebars.ts", "tailwind.config.ts"],
+  "exclude": [".docusaurus", "build", "node_modules"]
+}

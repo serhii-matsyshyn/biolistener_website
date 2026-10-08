@@ -1,0 +1,312 @@
+/* Self-hosted fonts (bundled into the build; no third-party font requests). */
+@import '@fontsource-variable/inter/wght.css';
+@import '@fontsource-variable/jetbrains-mono/wght.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/* Design tokens. Derived from the BioListener logo: one red accent,   */
+/* warm grey for everything secondary.                                 */
+/* ------------------------------------------------------------------ */
+:root {
+  --bl-bg: #f4f1ed;
+  --bl-surface: rgba(255, 255, 255, 0.94);
+  --bl-surface-2: #ebe6e0;
+  --bl-ink: #1d1b1a;
+  --bl-muted: #5d5855;
+  --bl-faint: #8a8480;
+  --bl-line: rgba(29, 27, 26, 0.11);
+  --bl-accent: #b72108; /* accent used for text, icons, links */
+  --bl-accent-solid: #b72108; /* accent used as a fill behind white text */
+  --bl-accent-soft: rgba(183, 33, 8, 0.08);
+  /* Signal background: "r,g,b" triplets read by SignalBackground.tsx */
+  --bl-trace: 183, 33, 8;
+  --bl-trace-alt: 110, 106, 104;
+  --bl-trace-gain: 1.8; /* multiplies the opacity of the background traces */
+  --bl-trace-width: 1.3; /* line width of the traces, px */
+
+  --bl-font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  --bl-font-mono: 'JetBrains Mono Variable', ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono',
+    monospace;
+
+  /* Infima (Docusaurus) mapping */
+  --ifm-color-primary: #b72108;
+  --ifm-color-primary-dark: #a32009;
+  --ifm-color-primary-darker: #9a1e09;
+  --ifm-color-primary-darkest: #7f1907;
+  --ifm-color-primary-light: #c7260b;
+  --ifm-color-primary-lighter: #d0280b;
+  --ifm-color-primary-lightest: #ee3513;
+  --ifm-background-color: var(--bl-bg);
+  --ifm-background-surface-color: var(--bl-bg);
+  --ifm-navbar-background-color: var(--bl-bg);
+  --ifm-footer-background-color: var(--bl-surface-2);
+  --ifm-font-color-base: var(--bl-ink);
+  --ifm-font-family-base: var(--bl-font-sans);
+  --ifm-heading-font-family: var(--bl-font-mono);
+  --ifm-font-family-monospace: var(--bl-font-mono);
+  --ifm-heading-font-weight: 700;
+  --ifm-navbar-shadow: 0 1px 0 var(--bl-line);
+  --ifm-navbar-link-color: var(--bl-muted);
+  --ifm-navbar-link-hover-color: var(--bl-accent);
+  --ifm-footer-link-color: var(--bl-muted);
+  --ifm-footer-link-hover-color: var(--bl-accent);
+  --ifm-footer-title-color: var(--bl-ink);
+  --ifm-toc-border-color: var(--bl-line);
+  --ifm-code-font-size: 92%;
+  --ifm-navbar-height: 4rem;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] {
+  --bl-bg: #141110;
+  --bl-surface: rgba(32, 27, 25, 0.94);
+  --bl-surface-2: #1c1816;
+  --bl-ink: #f3efec;
+  --bl-muted: #b0a8a3;
+  --bl-faint: #857d78;
+  --bl-line: rgba(255, 255, 255, 0.11);
+  --bl-accent: #ff6a4d; /* the logo red is too dark for text on near-black */
+  --bl-accent-solid: #b72108;
+  --bl-accent-soft: rgba(255, 106, 77, 0.1);
+  --bl-trace: 255, 122, 96;
+  --bl-trace-alt: 215, 208, 204;
+  --bl-trace-gain: 4.6; /* faint traces vanish on near-black: draw them much stronger */
+  --bl-trace-width: 1.6;
+
+  --ifm-color-primary: #ff6a4d;
+  --ifm-color-primary-dark: #ff4d2b;
+  --ifm-color-primary-darker: #ff3f1a;
+  --ifm-color-primary-darkest: #e62600;
+  --ifm-color-primary-light: #ff876f;
+  --ifm-color-primary-lighter: #ff9580;
+  --ifm-color-primary-lightest: #ffc0b3;
+  --ifm-background-color: var(--bl-bg);
+  --ifm-background-surface-color: var(--bl-bg);
+  --ifm-navbar-background-color: var(--bl-bg);
+  --ifm-footer-background-color: var(--bl-surface-2);
+  --docusaurus-highlighted-code-line-bg: rgba(255, 255, 255, 0.1);
+}
+
+/* ------------------------------------------------------------------ */
+/* Docusaurus chrome                                                   */
+/* ------------------------------------------------------------------ */
+.navbar__logo {
+  height: 1.625rem;
+  margin-right: 1.25rem;
+}
+.navbar__logo img {
+  height: 100%;
+  width: auto;
+}
+.navbar__link {
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+.footer {
+  border-top: 1px solid var(--bl-line);
+  font-size: 0.9rem;
+}
+.footer__title {
+  font-family: var(--bl-font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.footer__copyright {
+  color: var(--bl-muted);
+  font-size: 0.85rem;
+}
+
+/* ------------------------------------------------------------------ */
+/* Scope for the custom (Tailwind) pages. Tailwind's preflight is off, */
+/* so the few resets the utilities rely on are applied here only.      */
+/* ------------------------------------------------------------------ */
+/* Inside Tailwind's base layer, so that utilities (mt-4, border-b, ...) override it. */
+@layer base {
+  .bl-page {
+    color: var(--bl-ink);
+    background: var(--bl-bg);
+    font-family: var(--bl-font-sans);
+  }
+  .bl-page *,
+  .bl-page *::before,
+  .bl-page *::after {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: var(--bl-line);
+  }
+  .bl-page :where(h1, h2, h3, h4, p, ul, ol, figure, blockquote, dl, dd) {
+    margin: 0;
+  }
+  .bl-page :where(ul, ol) {
+    padding: 0;
+    list-style: none;
+  }
+  .bl-page :where(h1, h2, h3, h4) {
+    font-family: var(--bl-font-mono);
+  }
+  .bl-page :where(img) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+  .bl-page :where(a) {
+    color: inherit;
+    text-decoration: none;
+  }
+  .bl-page :where(button) {
+    font: inherit;
+    color: inherit;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  .bl-page :where(table) {
+    display: table;
+    width: 100%;
+    margin: 0;
+    border-collapse: collapse;
+    overflow: visible;
+  }
+  .bl-page :where(table thead tr, table tr, table tr:nth-child(2n)) {
+    background: none;
+    border: 0;
+  }
+  .bl-page :where(th, td) {
+    border: 0;
+    padding: 0;
+    text-align: left;
+    font-weight: inherit;
+  }
+  .bl-page :where(a, button):focus-visible {
+    outline: 2px solid var(--bl-accent);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  .bl-page :where(dialog) {
+    color: var(--bl-ink);
+  }
+}
+
+/* Calm patch behind the hero text: softens the traces where they would cross
+   the headline. A static gradient, not a blur filter. */
+.bl-quiet {
+  position: relative;
+}
+.bl-quiet::before {
+  content: '';
+  position: absolute;
+  inset: -14px -22px;
+  z-index: -1;
+  border-radius: 18px;
+  background: var(--bl-bg);
+  opacity: 0.86;
+  box-shadow: 0 0 22px 14px var(--bl-bg);
+}
+
+/* ------------------------------------------------------------------ */
+/* Floating signal background (see SignalBackground.tsx).              */
+/* One pre-rendered, seamlessly repeating strip moved by a CSS         */
+/* transform. No JavaScript runs per frame.                            */
+/* ------------------------------------------------------------------ */
+.traces {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 940px;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  /* Present behind the hero, then fades out further down the page. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 62%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0, #000 62%, transparent 100%);
+}
+.traces__strip {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  background-repeat: repeat-x;
+  background-position: 0 0;
+  will-change: transform;
+  opacity: 0;
+  transition: opacity 0.9s ease-out;
+  animation: traces-scroll var(--loop, 60s) linear infinite;
+}
+.traces__strip--ready {
+  opacity: 1;
+}
+@keyframes traces-scroll {
+  to {
+    transform: translate3d(calc(-1 * var(--tile, 0px)), 0, 0);
+  }
+}
+/* Soft fade at the left and right edges. */
+.traces::before,
+.traces::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 14%;
+  z-index: 1;
+}
+.traces::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bl-bg), transparent);
+}
+.traces::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--bl-bg), transparent);
+}
+@media (prefers-reduced-motion: reduce) {
+  .traces__strip {
+    animation: none;
+    transition: none;
+  }
+}
+
+/* Plain photo: the whole image, rounded corners, no frame and no mask. */
+.bl-photo-plain {
+  border-radius: 16px;
+}
+[data-theme='dark'] .bl-photo-plain {
+  filter: brightness(0.86);
+}
+
+/* Cut-out product photo (transparent PNG): soft shadow on light, faint glow on dark. */
+.bl-photo-cutout {
+  filter: drop-shadow(0 18px 22px rgba(40, 28, 20, 0.22)) drop-shadow(0 3px 5px rgba(40, 28, 20, 0.18));
+}
+[data-theme='dark'] .bl-photo-cutout {
+  filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.35)) drop-shadow(0 20px 46px rgba(255, 140, 110, 0.14));
+}
+
+/* Theme switch: two states only. Never show the "system" icon; show the sun
+   or the moon for the theme that is actually on screen. */
+html [class*='systemToggleIcon'] {
+  display: none !important;
+}
+html[data-theme='light'] [class*='lightToggleIcon'],
+html[data-theme='dark'] [class*='darkToggleIcon'] {
+  display: initial !important;
+}
+html[data-theme='light'] [class*='darkToggleIcon'],
+html[data-theme='dark'] [class*='lightToggleIcon'] {
+  display: none !important;
+}
+
+/* Phones and tablets: text spans the full width, so let the traces show
+   through the calm patch a little more. */
+@media (max-width: 1023px) {
+  .bl-quiet::before {
+    opacity: 0.74;
+    box-shadow: 0 0 16px 10px var(--bl-bg);
+  }
+}
